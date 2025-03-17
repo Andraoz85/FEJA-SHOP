@@ -17,3 +17,8 @@
 
 7. Pusha upp branchen första gången:
    - git push -u origin feature/new-branch
+
+## Figma
+
+https://www.figma.com/board/51N9d2Nq5PtcFzmvtNIC64/Feja-Shop-brainstorm?node-id=26-48&t=QlGO8vMN6cnulcDr-0
+https://www.figma.com/design/U87KDhKW6yPp80WikbN9BW/Feja-Shop?node-id=0-1&p=f&t=2dvYKdIBtw91O4xq-0
