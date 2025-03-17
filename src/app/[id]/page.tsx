@@ -1,4 +1,5 @@
-import { fetchDynamicProduct } from "../../../actions";
+import Image from "next/image";
+import { fetchDynamicProduct } from "../../actions/fetchDynamicData";
 
 export default async function DynamicPage({ params }: { params: Promise<{ id: string }> }) {
     const id = (await params).id;
@@ -6,6 +7,12 @@ export default async function DynamicPage({ params }: { params: Promise<{ id: st
 
     return (
         <main>
+            <Image 
+                src= {product.thumbnail} 
+                width={300} 
+                height={300} 
+                alt={product.title} 
+            />
             <h1>{product.title}</h1>
             <p>{product.description}</p>
             <p>{product.price}</p>
