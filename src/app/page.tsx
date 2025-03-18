@@ -1,9 +1,5 @@
-import Image from "next/image";
-import styles from "./page.module.css";
-import { Product } from "@/interfaces/Product";
 import { fetchProducts } from "@/actions/fetchData";
 import ProductList from "@/components/ProductList";
-
 
 export default async function Home() {
   const data = await fetchProducts();

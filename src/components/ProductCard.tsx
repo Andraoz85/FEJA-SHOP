@@ -1,5 +1,6 @@
 import React from "react";
 import { Product } from "@/interfaces/Product";
+import Image from "next/image";
 
 interface ProductCardProps {
   product: Product;
@@ -8,9 +9,12 @@ interface ProductCardProps {
 export default function ProductCard({ product }: ProductCardProps) {
   return (
     <div className="border p-4 rounded shadow">
-      <img
+      <Image
         src={product.thumbnail}
         alt={product.title}
+        width={300}
+        height={200}
+        unoptimized
         className="w-full h-auto mb-2"
       />
       <h2 className="text-lg font-black">{product.title}</h2>
