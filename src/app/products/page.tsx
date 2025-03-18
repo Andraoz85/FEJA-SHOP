@@ -1,11 +1,7 @@
-import Image from "next/image";
-import styles from "./page.module.css";
-import { Product } from "@/interfaces/Product";
 import { fetchProducts } from "@/actions/fetchData";
-import ProductList from "@/components/ProductList";
+import ProductList from "../../components/ProductList";
 
-
-export default async function Home() {
+export default async function ProductsPage() {
   const data = await fetchProducts();
   const products = data.products;
 
@@ -16,4 +12,3 @@ export default async function Home() {
     </div>
   );
 }
-
