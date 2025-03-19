@@ -1,6 +1,5 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import { CartProvider } from "../context/CartContext";
 import type { AppProps } from "next/app";
 
 export default function Home({ Component, pageProps }: AppProps) {
