@@ -1,10 +1,10 @@
 "use client"
-import { SearchResultData } from "@/interfaces/searchResultData";
+import { DynamicProductData } from "@/interfaces/dynamicProductData";
 import { useState } from "react";
 
 export default function SearchBar() {
   const [query, setQuery] = useState<string>("");
-  const [results, setResults] = useState<SearchResultData[]>([]);
+  const [results, setResults] = useState<DynamicProductData[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   const handleSearch = async () => {
