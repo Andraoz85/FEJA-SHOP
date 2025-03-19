@@ -5,12 +5,11 @@ import { Product } from "@/interfaces/Product";
 export default async function DynamicPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
+  const { id } = await params;
   const data = await fetchProducts();
-  const product = data.products.find(
-    (p: Product) => p.id === Number(params.id)
-  );
+  const product = data.products.find((p: Product) => p.id === Number(id));
 
   if (!product) {
     return <div>Product not found</div>;
