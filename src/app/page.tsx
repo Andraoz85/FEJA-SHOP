@@ -1,12 +1,14 @@
-import Image from "next/image";
-import styles from "./page.module.css";
-import type { AppProps } from "next/app";
+import { fetchProducts } from "@/actions/fetchData";
+import ProductList from "@/components/ProductList";
 
-export default function Home({ Component, pageProps }: AppProps) {
+export default async function Home() {
+  const data = await fetchProducts();
+  const products = data.products;
+
   return (
-    <div className={styles.page}>
-      <h1>Welcome to FEJA-Shop!</h1>
-      <p>A web-shop built with Next.js.</p>
+    <div>
+      <h1 className="text-2xl font-bold mb-4">Products</h1>
+      <ProductList products={products} />
     </div>
   );
 }
