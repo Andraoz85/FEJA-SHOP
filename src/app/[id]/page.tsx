@@ -1,19 +1,33 @@
+"use client";
+
 import Image from "next/image";
 import { fetchProducts } from "@/actions/fetchData";
 import { Product } from "@/interfaces/Product";
+import { useCart } from "@/context/CartContext";
+import { useEffect, useState } from "react";
 
-export default async function DynamicPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
-  const data = await fetchProducts();
-  const product = data.products.find((p: Product) => p.id === Number(id));
+export default function DynamicPage({ params }: { params: { id: string } }) {
+  const [product, setProduct] = useState<Product | null>(null);
+  const { addToCart } = useCart();
+
+  useEffect(() => {
+    const loadProduct = async () => {
+      const data = await fetchProducts();
+      const foundProduct = data.products.find(
+        (p: Product) => p.id === Number(params.id)
+      );
+      setProduct(foundProduct || null);
+    };
+    loadProduct();
+  }, [params.id]);
 
   if (!product) {
     return <div>Product not found</div>;
   }
+
+  const handleAddToCart = () => {
+    addToCart(product);
+  };
 
   return (
     <main className="p-4">
@@ -29,7 +43,10 @@ export default async function DynamicPage({
         <p className="text-gray-600 mb-4">{product.description}</p>
         <p className="text-xl font-bold text-blue-600">{product.price} kr</p>
         <div className="mt-4">
-          <button className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition-colors">
+          <button
+            onClick={handleAddToCart}
+            className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition-colors"
+          >
             Add to cart
           </button>
         </div>
