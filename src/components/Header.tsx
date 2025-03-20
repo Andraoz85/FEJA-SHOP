@@ -3,12 +3,24 @@ import { useSearch } from '@/context/searchContext';
 import React, { useState } from 'react';
 
 export default function Header() {
-  const { setQuery } = useSearch();
+  const { setQuery, setResults } = useSearch();
   const [input, setInput] = useState<string>("");
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     if (!input.trim()) return;
     setQuery(input);
+
+    try {
+      const response = await fetch(`https://dummyjson.com/products/search?q=${input}`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status} | ${response.statusText}`);
+      }
+      const data = await response.json();
+      setResults(data.products);
+    } catch (err) {
+      console.error("Search error:", err);
+      setResults([]);
+    }
   };
 
   return (
