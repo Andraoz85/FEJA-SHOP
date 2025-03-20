@@ -1,6 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { useSearch } from "@/context/searchContext";
+import ProductCard from "./ProductCard";
 
 export default function SearchResults() {
     const { query, results, setResults } = useSearch();
@@ -25,18 +26,14 @@ export default function SearchResults() {
     }, [query]);
 
     return (
-        <div>
-            <ul className="mt-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {results.length > 0 ? (
                 results.map((product) => (
-                    <li key={product.id} className="border-b p-2">
-                        {product.title}
-                    </li>
+                    <ProductCard key={product.id} product={product} />
                 ))
             ) : (
                 <p className="text-gray-500">No result found</p>
             )}
-          </ul>
         </div>
     )
 }
