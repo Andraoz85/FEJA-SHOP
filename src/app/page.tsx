@@ -1,5 +1,6 @@
 import { fetchProducts } from "@/actions/fetchData";
 import ProductList from "@/components/ProductList";
+import SearchResults from "@/components/SearchResults";
 
 export default async function Home() {
   const data = await fetchProducts();
@@ -9,7 +10,8 @@ export default async function Home() {
     <div>
       <h1 className="text-2xl font-bold mb-4">Products</h1>
       <ProductList products={products} />
+
+      <SearchResults />
     </div>
   );
 }
-
