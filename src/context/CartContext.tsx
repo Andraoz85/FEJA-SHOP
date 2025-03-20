@@ -16,18 +16,14 @@ type CartContextType = {
   total: number;
   addToCart: (item: CartItem) => void;
   removeFromCart: (id: string) => void;
+  updateQuantity: (id: string, quantity: number) => void;
   clearCart: () => void;
 };
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-  // Pre-filled cart with test items
-  const [cart, setCart] = useState<CartItem[]>([
-    { id: "1", name: "T-shirt", price: 20, quantity: 2 },
-    { id: "2", name: "Jeans", price: 50, quantity: 1 },
-    { id: "3", name: "Sneakers", price: 80, quantity: 1 },
-  ]);
+  const [cart, setCart] = useState<CartItem[]>([]);
 
   const subtotal = cart.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -52,6 +48,12 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== id));
   };
 
+  const updateQuantity = (id: string, quantity: number) => {
+    setCart((prevCart) =>
+      prevCart.map((item) => (item.id === id ? { ...item, quantity } : item))
+    );
+  };
+
   const clearCart = () => setCart([]);
 
   return (
@@ -63,6 +65,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         total,
         addToCart,
         removeFromCart,
+        updateQuantity,
         clearCart,
       }}
     >
