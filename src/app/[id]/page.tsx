@@ -4,9 +4,14 @@ import Image from "next/image";
 import { fetchProducts } from "@/actions/fetchData";
 import { Product } from "@/interfaces/Product";
 import { useCart } from "@/context/CartContext";
-import { useEffect, useState } from "react";
+import { useEffect, useState, use } from "react";
 
-export default function DynamicPage({ params }: { params: { id: string } }) {
+export default function DynamicPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = use(params);
   const [product, setProduct] = useState<Product | null>(null);
   const { addToCart } = useCart();
 
@@ -14,12 +19,12 @@ export default function DynamicPage({ params }: { params: { id: string } }) {
     const loadProduct = async () => {
       const data = await fetchProducts();
       const foundProduct = data.products.find(
-        (p: Product) => p.id === Number(params.id)
+        (p: Product) => p.id === Number(id)
       );
       setProduct(foundProduct || null);
     };
     loadProduct();
-  }, [params.id]);
+  }, [id]);
 
   if (!product) {
     return <div>Product not found</div>;
