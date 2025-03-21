@@ -1,10 +1,9 @@
 interface Review {
-    rating: number;
-    comment: string;
-    date: Date;
-    reviewerName: string;
+  rating: number;
+  comment: string;
+  date: Date;
+  reviewerName: string;
 }
-
 
 export interface Product {
   id: number;
