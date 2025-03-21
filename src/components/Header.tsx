@@ -1,12 +1,36 @@
 "use client";
 
-import React from "react";
+import { useSearch } from "@/context/searchContext";
 import { useCart } from "@/context/CartContext";
+import React, { useState } from "react";
 import Link from "next/link";
 
 export default function Header() {
+  const { setQuery, setResults } = useSearch();
   const { cart } = useCart();
+  const [input, setInput] = useState<string>("");
   const itemCount = cart.reduce((acc, item) => acc + item.quantity, 0);
+
+  const handleSearch = async () => {
+    if (!input.trim()) return;
+    setQuery(input);
+
+    try {
+      const response = await fetch(
+        `https://dummyjson.com/products/search?q=${input}`
+      );
+      if (!response.ok) {
+        throw new Error(
+          `HTTP error! Status: ${response.status} | ${response.statusText}`
+        );
+      }
+      const data = await response.json();
+      setResults(data.products);
+    } catch (err) {
+      console.error("Search error:", err);
+      setResults([]);
+    }
+  };
 
   return (
     <header className="bg-gray-200 p-4 flex items-center">
@@ -14,10 +38,15 @@ export default function Header() {
         <div className="flex">
           <input
             type="text"
-            placeholder="Search Product"
+            placeholder="Search product..."
             className="px-3 py-2 border border-gray-400 rounded-l"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
           />
-          <button className="px-3 py-2 border border-gray-400 border-l-0 rounded-r bg-white">
+          <button
+            onClick={handleSearch}
+            className="px-3 py-2 border border-gray-400 border-l-0 rounded-r bg-white"
+          >
             🔍
           </button>
         </div>
