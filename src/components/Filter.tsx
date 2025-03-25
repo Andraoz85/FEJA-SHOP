@@ -4,7 +4,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { fetchCategories } from "@/actions/fetchData";
 
 interface FilterProps {
-    onCategoryChange: (category: string) => void;
+    onCategoryChange: (category: string | null) => void;
 }
 
 export default function Filter({ onCategoryChange }: FilterProps) {
@@ -19,7 +19,7 @@ export default function Filter({ onCategoryChange }: FilterProps) {
     }, []);
 
     function handleChange(value: string): void {
-        onCategoryChange(value);
+        onCategoryChange(value === "all" ? null : value);
     }
 
     return (
@@ -30,6 +30,7 @@ export default function Filter({ onCategoryChange }: FilterProps) {
                     <SelectValue placeholder="Select category" />
                 </SelectTrigger>
                 <SelectContent>
+                    <SelectItem value="all">All categories</SelectItem>
                     {categories.map((category) => (
                         <SelectItem key={category} value={category}>
                             {category.charAt(0).toUpperCase() + category.slice(1)}
