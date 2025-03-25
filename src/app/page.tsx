@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { Product } from "@/interfaces/Product";
 import Filter from "@/components/Filter";
 import { usePathname } from "next/navigation";
+import { CustomButton } from "@/components/CustomButton";
 
 export default function Home() {
   const { results } = useSearch();
@@ -32,6 +33,9 @@ export default function Home() {
     <div>
       <h1 className="text-2xl font-bold mb-4">Products</h1>
       <Filter onCategoryChange={setSelectedCategory} />
+
+      <CustomButton variant="outline">Button</CustomButton> {/* Test button */}
+      
       {pathname === "/" && results.length > 0 ? (
         <SearchResults />
       ) : (
