@@ -7,11 +7,13 @@ import { useSearch } from "@/context/searchContext";
 import { useEffect, useState } from "react";
 import { Product } from "@/interfaces/Product";
 import Filter from "@/components/Filter";
+import { usePathname } from "next/navigation";
 
 export default function Home() {
   const { results } = useSearch();
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -30,7 +32,7 @@ export default function Home() {
     <div>
       <h1 className="text-2xl font-bold mb-4">Products</h1>
       <Filter onCategoryChange={setSelectedCategory} />
-      {results.length > 0 ? (
+      {pathname === "/" && results.length > 0 ? (
         <SearchResults />
       ) : (
         <ProductList products={products} />

@@ -4,11 +4,13 @@ import { useSearch } from "@/context/searchContext";
 import { useCart } from "@/context/CartContext";
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
   const { setQuery, setResults } = useSearch();
   const { cart } = useCart();
   const [input, setInput] = useState<string>("");
+  const router = useRouter();
   const itemCount = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   const handleSearch = async () => {
@@ -26,10 +28,24 @@ export default function Header() {
       }
       const data = await response.json();
       setResults(data.products);
+      router.push("/search");
     } catch (err) {
       console.error("Search error:", err);
       setResults([]);
     }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
+  const clearSearch = () => {
+    setInput("");
+    setQuery("");
+    setResults([]);
+    router.push("/");
   };
 
   return (
@@ -42,13 +58,22 @@ export default function Header() {
             className="px-3 py-2 border border-gray-400 rounded-l"
             value={input}
             onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
           />
           <button
             onClick={handleSearch}
-            className="px-3 py-2 border border-gray-400 border-l-0 rounded-r bg-white"
+            className="px-3 py-2 border border-gray-400 border-l-0 bg-white"
           >
             🔍
           </button>
+          {input && (
+            <button
+              onClick={clearSearch}
+              className="px-3 py-2 border border-gray-400 border-l-0 rounded-r bg-white"
+            >
+              ✕
+            </button>
+          )}
         </div>
         <Link
           href="/pages/cart"
