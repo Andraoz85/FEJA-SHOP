@@ -1,11 +1,23 @@
+import { useEffect, useState } from "react";
 import { Label } from "./ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import { fetchCategories } from "@/actions/fetchData";
 
 interface FilterProps {
     onCategoryChange: (category: string) => void;
 }
 
 export default function Filter({ onCategoryChange }: FilterProps) {
+    const [categories, setCategories] = useState<string[]>([]);
+
+    useEffect(() => {
+        const loadCategories = async () => {
+            const data = await fetchCategories();
+            setCategories(data);
+        };
+        loadCategories();
+    }, []);
+
     function handleChange(value: string): void {
         onCategoryChange(value);
     }
@@ -18,10 +30,11 @@ export default function Filter({ onCategoryChange }: FilterProps) {
                     <SelectValue placeholder="Select category" />
                 </SelectTrigger>
                 <SelectContent>
-                    {/* TODO: change to dynamic categories */}
-                    <SelectItem value="beauty">Beauty</SelectItem>
-                    <SelectItem value="fragrances">Fragrances</SelectItem>
-                    <SelectItem value="furniture">Furniture</SelectItem>
+                    {categories.map((category) => (
+                        <SelectItem key={category} value={category}>
+                            {category.charAt(0).toUpperCase() + category.slice(1)}
+                        </SelectItem>
+                    ))}
                 </SelectContent>
             </Select>
         </div>

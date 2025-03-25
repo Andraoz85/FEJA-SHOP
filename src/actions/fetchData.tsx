@@ -29,7 +29,7 @@ export async function fetchCategories() {
   }
 }
 
-// Fetch product by category
+// Fetch products by category
 export async function fetchProductsByCategory(category: string) {
   const baseUrl = `https://dummyjson.com/products/category/${category}`;
   try {
