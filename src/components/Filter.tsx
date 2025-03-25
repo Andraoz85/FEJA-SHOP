@@ -1,13 +1,13 @@
-import { useRouter } from "next/navigation";
 import { Label } from "./ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 
-export default function Filter() {
-    const router = useRouter();
+interface FilterProps {
+    onCategoryChange: (category: string) => void;
+}
 
+export default function Filter({ onCategoryChange }: FilterProps) {
     function handleChange(value: string): void {
-        router.push(`/products/category/${value}`)
-        console.log(value);
+        onCategoryChange(value);
     }
 
     return (
