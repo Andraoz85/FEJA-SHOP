@@ -5,6 +5,7 @@ import { fetchProducts } from "@/actions/fetchData";
 import { Product } from "@/interfaces/Product";
 import { useCart } from "@/context/CartContext";
 import { useEffect, useState, use } from "react";
+import Link from "next/link";
 
 export default function DynamicPage({
   params,
