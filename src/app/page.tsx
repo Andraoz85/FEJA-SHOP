@@ -10,6 +10,7 @@ import { Product } from "@/interfaces/Product";
 export default function Home() {
   const { results } = useSearch();
   const [products, setProducts] = useState<Product[]>([]);
+  
 
   useEffect(() => {
     const loadProducts = async () => {
