@@ -50,12 +50,15 @@ export default function Header() {
   };
 
   return (
-    <header className="w-full bg-white border-b">
+    <header
+      className="w-full bg-white border-b"
+      style={{ boxShadow: "0 2px 4px rgba(0,0,0,0.1)" }}
+    >
       <div className="flex justify-center w-full">
         <div className="max-w-[900px] w-full px-4 py-4 flex items-center justify-between">
           {/* Logotyp till vänster */}
           <Link href="/" className="flex items-center">
-            <div className="relative w-[70px] h-[70px]">
+            <div className="relative w-[60px] h-[90px]">
               <Image
                 src="/logo.png"
                 alt="FEJA SHOP"
@@ -68,25 +71,25 @@ export default function Header() {
 
           {/* Sökfält i mitten */}
           <div className="w-[400px] mx-12">
-            <div className="flex w-full">
+            <div className="relative flex w-full">
               <input
                 type="text"
                 placeholder="Search product..."
-                className="w-full px-4 py-2 border border-gray-300 rounded-l focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="w-full pl-4 pr-10 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
               />
               <button
                 onClick={handleSearch}
-                className="px-4 py-2 border border-gray-300 border-l-0 bg-white hover:bg-gray-50"
+                className="absolute right-0 top-0 h-full px-3 flex items-center justify-center text-gray-500 hover:text-gray-700"
               >
-                🔍
+                🔎
               </button>
               {input && (
                 <button
                   onClick={clearSearch}
-                  className="px-4 py-2 border border-gray-300 border-l-0 rounded-r bg-white hover:bg-gray-50"
+                  className="absolute right-10 top-0 h-full px-3 flex items-center justify-center text-gray-500 hover:text-gray-700"
                 >
                   ✕
                 </button>
@@ -96,7 +99,7 @@ export default function Header() {
 
           {/* Shoppingbag till höger */}
           <Link href="/pages/cart" className="flex items-center">
-            <div className="relative w-[20px] h-[20px]">
+            <div className="relative w-[30px] h-[30px]">
               <Image
                 src="/bag.png"
                 alt="Shopping Bag"
