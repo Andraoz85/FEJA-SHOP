@@ -7,6 +7,8 @@ import { useCart } from "@/context/CartContext";
 import { useEffect, useState, use } from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import styles from "../../components/ui/card.module.css";
+import { Button } from "@/components/ui/button";
+import buttonStyles from "../../components/ui/button.module.css";
 
 export default function DynamicPage({
   params,
@@ -47,19 +49,14 @@ export default function DynamicPage({
       />
       <div className={styles.productPageWrapper}>
         <CardHeader>
-          <CardTitle>{product.title}</CardTitle>
+          <CardTitle><h1>{product.title}</h1></CardTitle>
         </CardHeader>
         <CardContent className={styles.productPageContent}>
           <p>{product.description}</p>
         </CardContent>
         <CardFooter className={styles.productPageFooter}>
           <p>{product.price} kr</p>
-          <button
-            onClick={handleAddToCart}
-            className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition-colors"
-          >
-            Add to cart
-          </button>
+          <Button onClick={handleAddToCart} className={buttonStyles.globalButton}>Add to cart</Button>
         </CardFooter>
       </div>
     </Card>

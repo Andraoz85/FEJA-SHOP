@@ -1,12 +1,31 @@
 /* Styling of Product Page */
 .productPage {
-    margin-top: 10em;
+    margin: 10em 0.5em 2em;
+    border-radius: 0;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    gap: 2em;
+
+    img {
+        width: 100%;
+        margin: auto 0;
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    p {
+        font-size: 1rem;
+    }
 }
 
 .productPageWrapper {
-    margin: 1em;
+    margin: 0.5em;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -15,9 +34,32 @@
 
 .productPageContent {
     margin-bottom: auto;
+    margin-right: 1em;
 }
 
 .productPageFooter {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1em;
+
+    p {
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+}
+
+@media (max-width: 600px) {
+    .productPage {
+        margin: 5em 1.5em 1.5em;
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .productPageFooter {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 0.5em;
+
+        p {
+            justify-self: flex-end;
+        }
+    }
 }
