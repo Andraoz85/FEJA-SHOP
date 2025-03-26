@@ -51,7 +51,7 @@ export default function Header() {
 
   return (
     <header
-      className="w-full bg-white border-b"
+      className="w-full bg-white border-b fixed"
       style={{ boxShadow: "0 2px 4px rgba(0,0,0,0.1)" }}
     >
       <div className="flex justify-center w-full">
