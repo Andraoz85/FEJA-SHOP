@@ -1,13 +1,14 @@
 .globalButton {
-    background-image: linear-gradient(to right, #810087, #FF3FE5);
-    color: #FFFFFF;
-    font-weight: 600;
-    font-size: 1rem;
-    padding: 0.5em 1em;
-    border-radius: 0.5em;
-    transition: filter 0.2s ease-in-out;
-  }
-  
-  .globalButton:hover {
-    filter: brightness(0.9);
-  }
+  background-image: linear-gradient(to right, #810087, #ff3fe5);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
+  transition: filter 0.2s ease-in-out;
+}
+
+.globalButton:hover {
+  filter: brightness(0.9);
+  cursor: pointer;
+}
