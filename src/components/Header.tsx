@@ -61,7 +61,7 @@ export default function Header() {
             <Link href="/" className="flex items-center">
               <div className="relative w-[60px] h-[90px]">
                 <Image
-                  src="/logo.png"
+                  src="/feja-logo.png"
                   alt="FEJA SHOP"
                   fill
                   style={{ objectFit: "contain" }}
