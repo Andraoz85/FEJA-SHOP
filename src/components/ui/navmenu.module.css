@@ -1,0 +1,18 @@
+/* src/components/ui/navmenu.module.css */
+.navigationMenu {
+    /* Dina anpassade stilar här */
+    background: red;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    /* Stilar för logotypen */
+}
+
+.searchContainer {
+    /* Stilar för sökcontainern */
+}
+
+.cartContainer {
+    /* Stilar för varukorgscontainern */
+}
