@@ -1,0 +1,23 @@
+/* Styling of Product Page */
+.productPage {
+    margin-top: 10em;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.productPageWrapper {
+    margin: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.5em;
+}
+
+.productPageContent {
+    margin-bottom: auto;
+}
+
+.productPageFooter {
+    display: flex;
+    justify-content: space-between;
+}
