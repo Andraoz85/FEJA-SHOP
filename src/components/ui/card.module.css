@@ -1,6 +1,6 @@
 /* Styling of Product Page */
 .productPage {
-    margin: 10em 0.5em 2em;
+    margin: 15em 0.5em 2em;
     border-radius: 0;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -50,7 +50,7 @@
 
 @media (max-width: 600px) {
     .productPage {
-        margin: 5em 1.5em 1.5em;
+        margin: 8em 1.5em 1.5em;
         grid-template-columns: repeat(1, 1fr);
     }
 
