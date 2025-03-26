@@ -15,13 +15,11 @@ export default function Cart() {
 
   return (
     <div className="max-w-4xl mx-auto p-4">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between my-6">
         <h1 className="text-2xl font-bold">Shopping Cart</h1>
-        <Link
-          href="/"
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
-        >
-          Back to Products
+
+        <Link href="/">
+          <Button className={stylesBtn.globalButton}>Back to Products</Button>
         </Link>
       </div>
       {cart.length === 0 ? (
