@@ -5,6 +5,10 @@ import { Product } from "@/interfaces/Product";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
+import styles from "./ui/card.module.css";
+import { Button } from "./ui/button";
+import buttonStyles from "./ui/button.module.css";
 
 interface ProductCardProps {
   product: Product;
@@ -20,8 +24,28 @@ export default function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <div className="border p-4 rounded shadow hover:shadow-lg transition-shadow">
-      <div className="block">
+    <div className="border p-4 shadow hover:shadow-lg transition-shadow">
+      <Card className={styles.productCard}>
+        <Link href={`/${product.id}`} className="block">
+          <Image
+            src={product.thumbnail}
+            alt={product.title}
+            width={300}
+            height={200}
+            unoptimized
+            className="w-full h-auto mb-2"
+          />
+          <CardHeader>
+            <CardTitle><h2>{product.title}</h2></CardTitle>
+          </CardHeader>
+          <CardFooter>
+            <p>{product.price} kr</p>
+            <Button onClick={handleAddToCart} className={buttonStyles.globalButton}>Add to cart</Button>
+          </CardFooter>
+        </Link>
+      </Card>
+
+      {/* <div className="block">
         <Link href={`/${product.id}`} className="block">
           <Image
             src={product.thumbnail}
@@ -45,7 +69,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         >
           Add to cart
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }
