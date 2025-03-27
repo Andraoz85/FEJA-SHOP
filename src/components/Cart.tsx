@@ -1,6 +1,7 @@
 "use client";
 
 import { useCart } from "../context/CartContext";
+import { Button } from "./ui/button";
 
 const Cart = () => {
   const { cart, removeFromCart, updateQuantity, subtotal, shipping, total } =
