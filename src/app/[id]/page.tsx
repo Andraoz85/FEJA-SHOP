@@ -1,11 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import { fetchProducts } from "@/actions/fetchData";
+import { fetchProductById } from "@/actions/fetchData";
 import { Product } from "@/interfaces/Product";
 import { useCart } from "@/context/CartContext";
 import { useEffect, useState, use } from "react";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import styles from "../../components/ui/card.module.css";
 import { Button } from "@/components/ui/button";
 import buttonStyles from "../../components/ui/button.module.css";
@@ -21,11 +28,8 @@ export default function DynamicPage({
 
   useEffect(() => {
     const loadProduct = async () => {
-      const data = await fetchProducts();
-      const foundProduct = data.products.find(
-        (p: Product) => p.id === Number(id)
-      );
-      setProduct(foundProduct || null);
+      const data = await fetchProductById(id);
+      setProduct(data);
     };
     loadProduct();
   }, [id]);
@@ -49,14 +53,21 @@ export default function DynamicPage({
       />
       <div className={styles.productPageWrapper}>
         <CardHeader>
-          <CardTitle><h1>{product.title}</h1></CardTitle>
+          <CardTitle>
+            <h1>{product.title}</h1>
+          </CardTitle>
         </CardHeader>
         <CardContent className={styles.productPageContent}>
           <p>{product.description}</p>
         </CardContent>
         <CardFooter className={styles.productPageFooter}>
           <p>{product.price} kr</p>
-          <Button onClick={handleAddToCart} className={buttonStyles.globalButton}>Add to cart</Button>
+          <Button
+            onClick={handleAddToCart}
+            className={buttonStyles.globalButton}
+          >
+            Add to cart
+          </Button>
         </CardFooter>
       </div>
     </Card>

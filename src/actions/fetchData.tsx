@@ -1,5 +1,5 @@
-export async function fetchProducts() {
-  const baseUrl = "https://dummyjson.com/products?limit=200";
+export async function fetchProducts(limit = 12, skip = 0) {
+  const baseUrl = `https://dummyjson.com/products?limit=${limit}&skip=${skip}`;
   try {
     const res = await fetch(baseUrl, { next: { revalidate: 3600 } }); // Cache for 1 hour
     if (!res.ok) {
@@ -9,7 +9,7 @@ export async function fetchProducts() {
     return data;
   } catch (error) {
     console.error("Error fetching products:", error);
-    return [];
+    return { products: [], total: 0 };
   }
 }
 
@@ -42,5 +42,21 @@ export async function fetchProductsByCategory(category: string) {
   } catch (error) {
     console.error("Error fetching products:", error);
     return [];
+  }
+}
+
+// Fetch a single product by ID
+export async function fetchProductById(id: string) {
+  const baseUrl = `https://dummyjson.com/products/${id}`;
+  try {
+    const res = await fetch(baseUrl, { next: { revalidate: 3600 } }); // Cache for 1 hour
+    if (!res.ok) {
+      throw new Error(`HTTP error! Status: ${res.status}`);
+    }
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    return null;
   }
 }
