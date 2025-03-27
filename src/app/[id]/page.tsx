@@ -1,11 +1,21 @@
 "use client";
 
 import Image from "next/image";
-import { fetchProducts } from "@/actions/fetchData";
+import { fetchProductById } from "@/actions/fetchData";
 import { Product } from "@/interfaces/Product";
 import { useCart } from "@/context/CartContext";
 import { useEffect, useState, use } from "react";
-import Link from "next/link";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import styles from "../../components/ui/card.module.css";
+import { Button } from "@/components/ui/button";
+import buttonStyles from "../../components/ui/button.module.css";
 
 export default function DynamicPage({
   params,
@@ -18,11 +28,8 @@ export default function DynamicPage({
 
   useEffect(() => {
     const loadProduct = async () => {
-      const data = await fetchProducts();
-      const foundProduct = data.products.find(
-        (p: Product) => p.id === Number(id)
-      );
-      setProduct(foundProduct || null);
+      const data = await fetchProductById(id);
+      setProduct(data);
     };
     loadProduct();
   }, [id]);
@@ -36,27 +43,33 @@ export default function DynamicPage({
   };
 
   return (
-    <main className="p-4">
-      <div className="max-w-2xl mx-auto">
-        <Image
-          src={product.thumbnail}
-          width={300}
-          height={300}
-          alt={product.title}
-          className="rounded-lg shadow-md mb-4"
-        />
-        <h1 className="text-2xl font-bold mb-2">{product.title}</h1>
-        <p className="text-gray-600 mb-4">{product.description}</p>
-        <p className="text-xl font-bold text-blue-600">{product.price} kr</p>
-        <div className="mt-4">
-          <button
+    <Card className={styles.productPage}>
+      <Image
+        src={product.thumbnail}
+        width={300}
+        height={300}
+        alt={product.title}
+        className="rounded-lg shadow-md mb-4"
+      />
+      <div className={styles.productPageWrapper}>
+        <CardHeader>
+          <CardTitle>
+            <h1>{product.title}</h1>
+          </CardTitle>
+        </CardHeader>
+        <CardContent className={styles.productPageContent}>
+          <p>{product.description}</p>
+        </CardContent>
+        <CardFooter className={styles.productPageFooter}>
+          <p>{product.price} kr</p>
+          <Button
             onClick={handleAddToCart}
-            className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition-colors"
+            className={buttonStyles.globalButton}
           >
             Add to cart
-          </button>
-        </div>
+          </Button>
+        </CardFooter>
       </div>
-    </main>
+    </Card>
   );
 }

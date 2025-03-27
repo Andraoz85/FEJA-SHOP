@@ -8,7 +8,7 @@ export default function SearchPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">
+      <h1 className="text-2xl mt-12 font-bold mb-4">
         {query ? `Search results for "${query}"` : "Search"}
       </h1>
       <SearchResults />
