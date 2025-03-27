@@ -14,7 +14,7 @@ export default function Cart() {
     useCart();
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
+    <div className="max-w-4xl mx-auto p-0 sm:p-4">
       <div className="flex items-center justify-between my-6">
         <h1 className="text-2xl font-bold">Shopping Cart</h1>
 
@@ -30,18 +30,20 @@ export default function Cart() {
             {cart.map((item) => (
               <div
                 key={item.id}
-                className="flex items-center gap-4 p-4 mb-6 shadow"
+                className="sm:flex items-center gap-4 p-4 mb-6 shadow"
               >
                 <Image
                   src={item.thumbnail}
                   alt={item.title}
                   width={100}
                   height={100}
-                  className="rounded-lg"
+                  className="rounded-lg justify-center"
                 />
                 <div className="flex-1">
-                  <div className="flex justify-between">
-                    <h2 className="font-semibold">{item.title}</h2>
+                  <div className="flex  justify-between">
+                    <h2 className="font-semibold sm:text-center">
+                      {item.title}
+                    </h2>
                     <button
                       onClick={() => removeFromCart(item.id)}
                       className=" text-red-500 hover:text-gray-500 cursor-pointer"
@@ -50,8 +52,8 @@ export default function Cart() {
                     </button>
                   </div>
                   <p className="text-gray-600 mb-12">{item.price} kr</p>
-                  <div className="flex justify-between items-baseline">
-                    <div className="flex items-center gap-2 mt-2">
+                  <div className="sm:flex  justify-between items-baseline">
+                    <div className="flex items-center gap-2">
                       <Button
                         className={stylesBtn.globalButton}
                         onClick={() =>
@@ -74,7 +76,7 @@ export default function Cart() {
                         +
                       </Button>
                     </div>
-                    <p className="mt-2 font-semibold">
+                    <p className="mt-2 font-semibold justify-self-end">
                       Total: {(item.price * item.quantity).toFixed(2)} kr
                     </p>
                   </div>
