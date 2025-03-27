@@ -37,7 +37,7 @@ export default function Home() {
   }, [selectedCategory, currentPage]);
 
   return (
-    <div>
+    <div className="my-12">
       <h1 className="text-2xl font-bold mb-4">Products</h1>
       <Filter onCategoryChange={setSelectedCategory} />
       {pathname === "/" && results.length > 0 ? (
