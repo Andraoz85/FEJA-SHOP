@@ -24,8 +24,8 @@ export default function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <div className="border shadow hover:shadow-lg transition-shadow">
-      <Link href={`/${product.id}`} className="block">
+    <div className="border shadow hover:shadow-lg transition-shadow h-full">
+      <Link href={`/${product.id}`} className="block h-full">
         <Card className={styles.productCard}>
           <Image
             src={product.thumbnail}
