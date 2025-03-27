@@ -32,18 +32,22 @@ export default function Cart() {
                 key={item.id}
                 className="sm:flex items-center gap-4 p-4 mb-6 shadow"
               >
-                <Image
-                  src={item.thumbnail}
-                  alt={item.title}
-                  width={100}
-                  height={100}
-                  className="rounded-lg justify-center"
-                />
+                <Link href={`/${item.id}`} className="block h-full">
+                  <Image
+                    src={item.thumbnail}
+                    alt={item.title}
+                    width={100}
+                    height={100}
+                    className="rounded-lg justify-center"
+                  />
+                </Link>
                 <div className="flex-1">
                   <div className="flex  justify-between">
-                    <h2 className="font-semibold sm:text-center">
-                      {item.title}
-                    </h2>
+                    <Link href={`/${item.id}`} className="block h-full">
+                      <h2 className="font-semibold sm:text-center">
+                        {item.title}
+                      </h2>
+                    </Link>
                     <button
                       onClick={() => removeFromCart(item.id)}
                       className=" text-red-500 hover:text-gray-500 cursor-pointer"
